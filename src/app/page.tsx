@@ -46,13 +46,13 @@ export default function Home() {
             Your marketplace for high quality{' '}
             <span className="text-violet-600">digital assets</span>.
           </h1>
-          <p 
+          <p
             className="
               mt-6
               text-lg
               max-w-prose
               text-muted-foreground"
-            >
+          >
             Welcome to DigitalHippo. Every asset on our platform is verified by our team to ensure our highest quality standards.
           </p>
           <div className="flex flex-col sm:flex-row mt-6 gap-4">
@@ -81,7 +81,7 @@ export default function Home() {
         "
       >
         <MaxWidthWrapper className="py-20">
-          <div 
+          <div
             className="
               grid
               grid-col-1
@@ -124,7 +124,7 @@ export default function Home() {
                       text-violet-900
                     "
                   >
-                    {<perk.Icon className="w-1/3 h-1/3"/>}
+                    {<perk.Icon className="w-1/3 h-1/3" />}
                   </div>
                 </div>
                 <div
