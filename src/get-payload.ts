@@ -5,12 +5,12 @@ import { InitOptions } from "payload/config"
 
 
 dotenv.config({
-    path: path.resolve(__dirname,"../.env")
+    path: path.resolve(__dirname, "../.env")
 })
 
 let cached = (global as any).payload
 
-if(!cached) {
+if (!cached) {
     cached = (global as any).payload = {
         client: null,
         promise: null,
@@ -23,17 +23,24 @@ interface Args {
 
 // Get us access to db, all place where we send emails
 // log users in and manage products
-export const getPayloadClient = async ({initOptions}: Args = {}) => {
-    // We will use this component to sign all the users in
-    if(!process.env.PAYLOAD_SECRET) {
+export const getPayloadClient = async ({
+    initOptions
+}: Args = {}): Promise<PAYLOAD_SECRET> => {
+
+    if (!process.env.PAYLOAD_SECRET) {
         throw new Error('PAYLOAD_SECRET is missing')
     }
 
-    if(cached.client) {
+    // We will use this component to sign all the users in
+    if (!process.env.PAYLOAD_SECRET) {
+        throw new Error('PAYLOAD_SECRET is missing')
+    }
+
+    if (cached.client) {
         return cached.client
     }
 
-    if(!cached.promise) {
+    if (!cached.promise) {
         cached.promise = payload.init({
             secret: process.env.PAYLOAD_SECRET,
             local: initOptions?.express ? false : true,
