@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/validators/account-credentials";
+import { AuthCredentialsValidator, TAuthCredentialsValidator } from "@/lib/validators/account-credentials-validator";
 import { trpc } from "@/trpc/client";
 
 const page = () => {
@@ -21,12 +21,17 @@ const page = () => {
             resolver: zodResolver(AuthCredentialsValidator),
         })
 
-        const { data } = trpc.anyApiRoute.useQuery()
-        console.log(data)
+    const { mutate, isLoading } =
+        trpc.auth.createPayloadUser.useMutation({})
 
-        const onSubmit = ({email, password}: TAuthCredentialsValidator) => {
-            // send data to the server
-        }
+    const onSubmit = ({
+        email, password
+    }: TAuthCredentialsValidator) => {
+        mutate({
+            email,
+            password
+        })
+    }
 
     return (
         <>
@@ -101,6 +106,7 @@ const page = () => {
                                             "focus-visible:ring-red-500": errors.password,
                                         })}
                                         placeholder="password"
+                                        type="password"
                                     />
                                 </div>
 
